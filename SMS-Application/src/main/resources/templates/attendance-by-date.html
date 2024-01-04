@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+		
+	<link rel="stylesheet" href="/css/styles.css">
+    <title>Attendance Details</title>
+    <style>
+
+        form {
+            text-align: center;
+        }
+        p{
+			margin-top: 50px;
+			text-align: center;
+			color: rgb(255, 0, 0);
+		}
+		.absent{
+			color: red;
+			font-weight: 500;
+		}
+		.present{
+			color: rgb(0, 176, 0);
+			font-weight: 500;
+		}
+		
+    </style>
+</head>
+<body>
+	<div th:replace="fragments/admin-header :: header"></div>
+
+    <h2>Attendance Details</h2>
+
+    <form th:action="@{/attendance/attendance-ByDate}" method="get">
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" name="date" required>
+        <input type="submit" value="View Attendance">
+    </form>
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Student Name</th>
+                    <th>Date</th>
+                    <th>Attendance Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="studentAttendance : ${studentAttendance}">
+                    <td th:text="${studentAttendance.userId}"></td>
+                    <td th:text="${studentAttendance.student.studentName}"></td>
+                    <td th:text="${studentAttendance.date}"></td>
+                    <td th:text="${studentAttendance.status}" th:class="${studentAttendance.status == 'Absent' ? 'absent' : (studentAttendance.status == 'Present' ? 'present' : '')}"></td>
+                    <td>
+						<a class="btn btn-info btn-sm" th:href="@{/attendance/update-attendance-form(attendanceId=${studentAttendance.attendanceId}, attendanceDate=${studentAttendance.date})}">Edit</a>
+                		<a class="btn btn-danger btn-sm" th:href="@{/attendance/delete-attendance(attendanceId=${studentAttendance.attendanceId}, attendanceDate=${studentAttendance.date})}">Delete</a>
+					</td>
+                </tr>
+            </tbody>
+        </table>
+    </th:block>
+    
+<div style="text-align: center;">
+    <a th:href="@{/attendance/mark-attendance-form}" class="btn btn-primary btn-s">Mark Attendance</a>
+    <a href="/admin-dashboard" class="btn btn-primary btn-s">Back</a>
+</div>
+
+    <th:block th:if="${#lists.isEmpty(studentAttendance)}">
+        <p>No attendance details available.</p>
+    </th:block>
+
+<div><th:block th:replace="fragments/admin-footer :: footer"></th:block></div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        section {
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .card {
+            margin-bottom: 15px;
+            /* background-image: url("students-gr.jpeg"); */
+        }
+
+        .card-header {
+            background-color: #4caf50;
+            color: #fff;
+            font-size: 1rem;
+            height: 55px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+        
+        .card-text {
+            font-size: 1rem;
+        }
+
+        .custom-btn {
+            padding: 0.2rem 0.5rem; /* Adjust the padding as needed */
+            font-size: 0.8rem; /* Adjust the font size as needed */
+        }
+
+        .card-link {
+            font-size: 0.8rem;
+        }
+
+        .card-footer {
+            height: 60px;
+        }
+    </style>
+    <script>
+        function refreshPage() {
+            location.reload(true); // true forces a reload from the server and not from the cache
+        }
+    </script>
+</head>
+<body>
+<div th:replace="fragments/admin-header :: header"></div>
+
+<section>
+    <h2>Welcome, <span th:text="${username}"></span>!</h2>
+
+    <div class="row">
+        <!-- Student Card -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">Students</div>
+                <div class="card-body" >
+                    <h5 class="card-title">Total Students</h5>
+                    <p class="card-text" th:text="${studentCount}"></p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/students/list}" class="card-link">View All</a>
+                    <a th:href="@{/students/addForm}" class="card-link">Add Student</a>
+                </div>
+            </div>  
+        </div>
+
+        <!-- Teacher Card -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">Teachers</div>
+                <div class="card-body">
+                    <h5 class="card-title">Total Teachers</h5>
+                    <p class="card-text" th:text="${teacherCount}"></p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/teachers/list}" class="card-link">View All</a>
+                    <a th:href="@{/teachers/addForm}" class="card-link">Add Teacher</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attendance Card -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">Attendance</div>
+                <div class="card-body">
+                    <h5 class="card-title">Attendance Summary</h5>
+                    <p class="card-text" th:text="${attendancePercentage} + '%'">%</p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/attendance/attendance-list}" class="card-link">View All</a>
+                    <a th:href="@{/attendance/mark-attendance-form}" class="card-link">Mark Attendance</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Card -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">Courses</div>
+                <div class="card-body">
+                    <h5 class="card-title">Total Courses</h5>
+                    <p class="card-text" th:text="${courseCount}"></p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/courses/list}" class="card-link">View All</a>
+                    <a th:href="@{/courses/addForm}" class="card-link">Add Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional content goes here -->
+
+</section>
+
+<div class="footer">
+	<th:block th:replace="fragments/admin-footer :: footer"></th:block>
+	</div>
+
+<!-- Include Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

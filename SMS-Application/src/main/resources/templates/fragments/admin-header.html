@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <!-- Add your common styles, scripts, or meta tags here -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+ 	
+</head>
+<body style="font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;">
+    <header style="background-color: #333;
+            color: white;
+            font-size: 34px;
+            padding: 5px;
+            text-align: center;">
+        Admin Dashboard
+        <nav style="background-color: #555;
+            color: #fff;
+            padding: 5px;
+            text-align: center;
+            position: static;
+            font-size: 19px;">
+        <span th:if="${session.userRole eq 'admin'}">
+        	<a style="margin: 0 5px;" href="/admin-dashboard" onclick="refreshPage()">Dashboard</a> |
+    	</span>
+        <a th:href="@{/students/list}">Students</a> |
+        <a th:href="@{/teachers/list}">Teachers</a> |
+        <a th:href="@{/courses/list}">Courses</a> |
+        <a th:href="@{/attendance/attendance-list}">Attendance</a> |
+        <a th:href="@{/logout}">Logout</a>
+    </nav>
+    </header>
+    
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

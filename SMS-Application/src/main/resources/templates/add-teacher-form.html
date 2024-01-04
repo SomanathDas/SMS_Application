@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Teacher</title>
+    <!-- Add your CSS stylesheets here -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            justify-content: center;
+            font-size: x-small;
+        }
+
+        .container {
+            max-width: 500px; /* Reduced max-width */
+            margin: 50px auto;
+            margin-top: 10px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            font-size: xx-large;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1px;
+        }
+        input{
+			font-size: xx-small;
+		}
+		
+		.form-control{
+			font-size: 14px;
+		}
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+	<div th:replace="fragments/admin-header :: header"></div>
+
+<div class="container">
+    <h2>Add Teacher</h2>
+
+    <form th:action="@{/teachers/saveTeacher}" method="post">
+		<div class="form-group">
+            <label for="userId">User ID:</label>
+            <input type="text" class="form-control" id="userId" name="userId" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Full Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="name">User Name:</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+    		<label for="courses">Courses:</label>
+    		<select class="form-control" id="courses" name="courses" required>
+        		<option th:each="course : ${courses}" th:value="${course.course_name}" th:text="${course.course_name}"></option>
+    		</select>
+		</div>
+
+        <!-- Add more form fields as needed -->
+
+        <button type="submit" class="btn btn-primary btn-sm">Add Teacher</button>
+    </form>
+
+    <!-- Add additional content or styling here -->
+
+</div>
+<div><th:block th:replace="fragments/admin-footer :: footer"></th:block></div>
+
+
+</body>
+</html>

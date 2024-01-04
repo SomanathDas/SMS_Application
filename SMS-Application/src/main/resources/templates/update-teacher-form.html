@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Teacher</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            justify-content: center;
+            font-size: x-small;
+        }
+
+        .container {
+            max-width: 500px; /* Reduced max-width */
+            margin: 50px auto;
+            margin-top: 10px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            font-size: 37px;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1px;
+        }
+        input{
+			font-size: x-small;
+		}
+		
+		.form-control{
+			font-size: 16px;
+		}
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        a.btn.btn-secondary.btn-bk {
+			color: white;
+		}
+    </style>
+</head>
+<body>
+
+<div th:replace="fragments/admin-header :: header"></div>
+
+<div class="container mt-4">
+    <h2>Update Teacher</h2>
+    <form th:action="@{/teachers/saveTeacher}" method="post" th:object="${teacher}">
+        <!-- Hidden field for user ID -->
+        <input type="hidden" th:field="*{userId}"/>
+
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="courses">Courses:</label>
+            <input type="text" class="form-control" id="courses" th:field="*{courses}" required/>
+        </div>
+
+        <!-- Add more fields as needed -->
+
+        <button type="submit" class="btn btn-primary btn-s">Update Teacher</button>
+        <a th:href="@{/teachers/list}" class="btn btn-secondary btn-s btn-bk">Back</a>
+    </form>
+</div>
+<div><th:block th:replace="fragments/admin-footer :: footer"></th:block></div>
+
+<!-- Include Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-J6qa4849NVWDC3vmU1m5a5U02Jq1b0WCPfcd+jjQg8fZO/oh9aP1weG1z9Ez90W1"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

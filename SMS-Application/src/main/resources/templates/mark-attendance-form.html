@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+		
+	<link rel="stylesheet" href="/css/styles.css">
+	
+	<style>
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            text-align: center;
+        }
+        p{
+			margin-top: 50px;
+			text-align: center;
+			color: rgb(255, 0, 0);
+		}
+		.form-control{
+			display:inline;
+			width: fit-content;
+		}
+    </style>
+</head>
+<body>
+<div th:replace="fragments/admin-header :: header"></div>
+
+<div class="container mt-2">
+    <h3 class="text-center">Mark Attendance</h3>
+
+    <form th:action="@{/attendance/mark-attendance}" method="post">
+        <div class="form-group1">
+            <label for="attendanceDate">Select Date:</label>
+            <input type="date" class="form-control" id="attendanceDate" name="attendanceDate" required>
+        </div>
+
+        <div class="form-group2">
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Student Name</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.userId}"></td>
+                    <td th:text="${student.studentName}"></td>
+                    <td>
+                        <label class="mr-2">
+                            <input type="radio" th:name="${'selectedStudents_' + student.userId}" th:value="Present" checked/>
+                            Present
+                        </label>
+                        <label>
+                            <input type="radio" th:name="${'selectedStudents_' + student.userId}" th:value="Absent"/>
+                            Absent
+                        </label>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+	<div><th:block th:replace="fragments/admin-footer :: footer"></th:block></div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

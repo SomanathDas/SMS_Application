@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance List</title>
+    <!-- Add your CSS links here -->
+</head>
+<body>
+    <h2>Attendance List</h2>
+
+    <th:block th:if="${not #lists.isEmpty(studentAttendance)}">
+        <table>
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Student Name</th>
+                    <th>Date</th>
+                    <th>Attendance Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="studentAttendance : ${studentAttendance}">
+                    <tr>
+                        <td th:text="${studentAttendance.userId}"></td>
+                        <td th:text="${studentAttendance.studentName}"></td>
+                        <td th:text="${studentAttendance.date}"></td>
+                        <td th:text="${studentAttendance.attendanceStatus}"></td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </th:block>
+
+    <th:block th:if="${#lists.isEmpty(studentAttendance)}">
+        <p>No attendance details availab.</p>
+    </th:block>
+
+    <!-- Include your footer and other common elements if necessary -->
+
+</body>
+</html>
